@@ -31,7 +31,7 @@ public class NewsCheckerEditActivity extends AppCompatActivity implements
 
     private Toolbar mToolbar;
     private EditText mTitleText;
-    private TextView mDateText, mTimeText, mRepeatText, mRepeatNoText, mRepeatTypeText;
+    private TextView mDateText, mTimeText, mRepeatText, mRepeatNoText, mRepeatTypeText, mURLText, mTargetStringText;
     private FloatingActionButton mFAB1;
     private FloatingActionButton mFAB2;
     private Switch mRepeatSwitch;
@@ -51,6 +51,8 @@ public class NewsCheckerEditActivity extends AppCompatActivity implements
     private NewsChecker mReceivedNewsChecker;
     private NewsCheckerDatabase rb;
     private AlarmReceiver mAlarmReceiver;
+    private String mURL;
+    private String mTargetString;
 
     // Constant Intent String
     public static final String EXTRA_REMINDER_ID = "NewsChecker_ID";
@@ -63,6 +65,8 @@ public class NewsCheckerEditActivity extends AppCompatActivity implements
     private static final String KEY_REPEAT_NO = "repeat_no_key";
     private static final String KEY_REPEAT_TYPE = "repeat_type_key";
     private static final String KEY_ACTIVE = "active_key";
+    private static final String KEY_URL = "url_key";
+    private static final String KEY_TARGET_STRING = "target_string_key";
 
     // Constant values in milliseconds
     private static final long milMinute = 60000L;
@@ -88,6 +92,8 @@ public class NewsCheckerEditActivity extends AppCompatActivity implements
         mFAB1 = (FloatingActionButton) findViewById(R.id.starred1);
         mFAB2 = (FloatingActionButton) findViewById(R.id.starred2);
         mRepeatSwitch = (Switch) findViewById(R.id.repeat_switch);
+        mURLText = (TextView) findViewById(R.id.set_url);
+        mTargetStringText = (TextView) findViewById(R.id.set_target_string);
 
         // Setup Toolbar
         setSupportActionBar(mToolbar);
@@ -98,7 +104,8 @@ public class NewsCheckerEditActivity extends AppCompatActivity implements
         // Setup NewsChecker Title EditText
         mTitleText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -107,7 +114,44 @@ public class NewsCheckerEditActivity extends AppCompatActivity implements
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        mURLText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mURL = s.toString().trim();
+                mURLText.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mTargetStringText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mTargetString = s.toString().trim();
+                mTargetStringText.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
 
         // Get reminder id from intent
@@ -125,6 +169,8 @@ public class NewsCheckerEditActivity extends AppCompatActivity implements
         mRepeatNo = mReceivedNewsChecker.getRepeatNo();
         mRepeatType = mReceivedNewsChecker.getRepeatType();
         mActive = mReceivedNewsChecker.getActive();
+        mURL = mReceivedNewsChecker.getURL();
+        mTargetString = mReceivedNewsChecker.getTargetString();
 
         // Setup TextViews using reminder values
         mTitleText.setText(mTitle);
@@ -133,8 +179,10 @@ public class NewsCheckerEditActivity extends AppCompatActivity implements
         mRepeatNoText.setText(mRepeatNo);
         mRepeatTypeText.setText(mRepeatType);
         mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
+        mURLText.setText(mURL);
+        mTargetStringText.setText(mTargetString);
 
-        // To save state on device rotation
+        // To recover from saved state on device rotation
         if (savedInstanceState != null) {
             String savedTitle = savedInstanceState.getString(KEY_TITLE);
             mTitleText.setText(savedTitle);
@@ -161,6 +209,10 @@ public class NewsCheckerEditActivity extends AppCompatActivity implements
             mRepeatType = savedRepeatType;
 
             mActive = savedInstanceState.getString(KEY_ACTIVE);
+
+            mURL = savedInstanceState.getString(KEY_URL);
+            mTargetString = savedInstanceState.getString(KEY_TARGET_STRING);
+
         }
 
         // Setup up active buttons
@@ -208,6 +260,9 @@ public class NewsCheckerEditActivity extends AppCompatActivity implements
         outState.putCharSequence(KEY_REPEAT_NO, mRepeatNoText.getText());
         outState.putCharSequence(KEY_REPEAT_TYPE, mRepeatTypeText.getText());
         outState.putCharSequence(KEY_ACTIVE, mActive);
+        outState.putCharSequence(KEY_URL, mURLText.getText());
+        outState.putCharSequence(KEY_TARGET_STRING, mTargetStringText.getText());
+
     }
 
     @Override
