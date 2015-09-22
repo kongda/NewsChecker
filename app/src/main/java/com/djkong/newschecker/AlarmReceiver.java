@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.WakefulBroadcastReceiver;
@@ -153,9 +154,14 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         while ((inputLine = in.readLine()) != null) {
             Log.d("http_test", inputLine);
             if (inputLine.toLowerCase().contains(targetString.toLowerCase())) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                PendingIntent pi = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
                 NotificationManager manager = (NotificationManager)mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-                Notification notification = new Notification(R.mipmap.ic_launcher, "New notification", System.currentTimeMillis());
-                notification.setLatestEventInfo(mContext, inputLine, inputLine, null);
+                Notification notification = new Notification(R.mipmap.ic_launcher, "New item detected!", System.currentTimeMillis());
+                notification.setLatestEventInfo(mContext, "New item:", inputLine, pi);
+                notification.flags = Notification.DEFAULT_LIGHTS | Notification.FLAG_AUTO_CANCEL;
                 manager.notify(id, notification);
             }
         }
