@@ -56,25 +56,25 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
             }
         }).start();
 
-        // Create intent to open NewsCheckerEditActivity on notification click
-        Intent editIntent = new Intent(context, NewsCheckerEditActivity.class);
-        editIntent.putExtra(NewsCheckerEditActivity.EXTRA_REMINDER_ID, Integer.toString(mReceivedID));
-        PendingIntent mClick = PendingIntent.getActivity(context, mReceivedID, editIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        // Create Notification
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
-                .setSmallIcon(R.drawable.ic_alarm_on_white_24dp)
-                .setContentTitle(context.getResources().getString(R.string.app_name))
-                .setTicker(mTitle)
-                .setContentText(mTitle)
-                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                .setContentIntent(mClick)
-                .setAutoCancel(true)
-                .setOnlyAlertOnce(true);
-
-        NotificationManager nManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        nManager.notify(mReceivedID, mBuilder.build());
+//        // Create intent to open NewsCheckerEditActivity on notification click
+//        Intent editIntent = new Intent(context, NewsCheckerEditActivity.class);
+//        editIntent.putExtra(NewsCheckerEditActivity.EXTRA_REMINDER_ID, Integer.toString(mReceivedID));
+//        PendingIntent mClick = PendingIntent.getActivity(context, mReceivedID, editIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        // Create Notification
+//        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+//                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
+//                .setSmallIcon(R.drawable.ic_alarm_on_white_24dp)
+//                .setContentTitle(context.getResources().getString(R.string.app_name))
+//                .setTicker(mTitle)
+//                .setContentText(mTitle)
+//                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+//                .setContentIntent(mClick)
+//                .setAutoCancel(true)
+//                .setOnlyAlertOnce(true);
+//
+//        NotificationManager nManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+//        nManager.notify(mReceivedID, mBuilder.build());
     }
 
     public void setAlarm(Context context, Calendar calendar, int ID) {
@@ -154,6 +154,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         while ((inputLine = in.readLine()) != null) {
             Log.d("http_test", inputLine);
             if (inputLine.toLowerCase().contains(targetString.toLowerCase())) {
+                Log.d("http_test", "hahaha");
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
                 PendingIntent pi = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);

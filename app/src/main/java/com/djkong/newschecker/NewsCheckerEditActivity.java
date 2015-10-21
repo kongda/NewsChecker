@@ -418,6 +418,8 @@ public class NewsCheckerEditActivity extends AppCompatActivity implements
         mReceivedNewsChecker.setRepeatNo(mRepeatNo);
         mReceivedNewsChecker.setRepeatType(mRepeatType);
         mReceivedNewsChecker.setActive(mActive);
+        mReceivedNewsChecker.setURL(mURL);
+        mReceivedNewsChecker.setTargetString(mTargetString);
 
         // Update reminder
         rb.updateNewsChecker(mReceivedNewsChecker);
