@@ -1,6 +1,6 @@
 # NewsChecker
 
-A Android App to ckeck for existence of a String on a webpage.
+A Android App to constantly ckeck for existence of a String on a webpage.
 
 - Written in Java
 - Material Design
