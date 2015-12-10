@@ -4,7 +4,7 @@ A Android App to ckeck for existance of an String on a webpage.
 
 - Written in Java
 - Material Design
-- Simple Structure
+- Simple code Structure
 
 Motivation
 ----------
