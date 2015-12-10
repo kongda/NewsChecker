@@ -15,9 +15,9 @@ Use Case:
 You like reading Yahoo News. You are especially interested in Cloud Computing. But you don't know when new articles about it will appear on Yahoo News. In this case, you can use this app to check for "Cloud Computing" on Yahoo News website. When a new article about it appears on the website, the app will notify you.
 
 Demonstration:
---------
-The following is a demonstration of using this app to check for the String "Most Popular" on teachengineering.org. As shown in the first screenshot, this app is configured to check the website every hour. In the second screenshot, this app finds the String "Most Popular" and notify the user about it. The user could just click on the notification and the specific website will be opened in the default browser.
---------
+---------------
+The following is a demonstration of using this app to check for the String "Most Popular" on www.teachengineering.org. As shown in the first screenshot, this app is configured to check the website every hour. In the second screenshot, this app finds the String "Most Popular" and notify the user about it. The user could just click on the notification and the specific website will be opened in the default browser.
+----------------
 ===
 <img   src="https://lh3.googleusercontent.com/9R9CZOz-Q7KOMKFv_doTiY_g2HZFKaJ44s1YBmJEj_3fTuBDODai97xVR14fpI68TIoT=h900-rw" />
 ===
