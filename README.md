@@ -42,8 +42,7 @@ Contribute
 TODO
 ----
 
-- [ ] Test1
-- [ ] Test2
+- [ ] Support Regular Expression
 
 License
 -------
